@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
+    WEBHOOK_SECRET: str
     DATABASE_URI: Optional[PostgresDsn] = None
 
     @validator("DATABASE_URI", pre=True)
