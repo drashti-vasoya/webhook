@@ -37,8 +37,8 @@ def generate_hash_signature(
 @app.post("/webhook/", status_code=http.HTTPStatus.ACCEPTED)
 async def webhook(request: Request, x_hub_signature: str = Header(None)):
     payload = await request.body()
-    secret = settings.WEBHOOK_SECRET
+    secret = settings.WEBHOOK_SECRET.encode("utf-8")
     signature = generate_hash_signature(secret, payload)
     if x_hub_signature != f"sha1={signature}":
         raise HTTPException(status_code=401, detail="Authentication error.")
-    return {"message": "Successfully connected.."}
+    return {"message": "Successfully connected."}
